@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CraftConnect AI - Empowering Artisans & Handcrafted Commerce</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        craft: {
+                            bg: '#FAF8F5',      /* Warm cream background */
+                            card: '#FFFFFF',    /* Pure white cards */
+                            primary: '#8A9A86', /* Sage Green */
+                            accent: '#D4836A',  /* Warm Terracotta */
+                            gold: '#E0A96D',    /* Muted Gold */
+                            text: '#2C3531',    /* Deep Charcoal */
+                            muted: '#7A847F',   /* Muted Gray-Green */
+                            light: '#F3EFEA'    /* Soft sand */
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-craft-bg text-craft-text font-sans antialiased min-h-screen flex flex-col">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-craft-accent text-white text-xs py-2 px-4 text-center font-medium">
+        ✨ Join the Expression Entrepreneur Membership & get 0% commission on your first 10 sales! <a href="#" onclick="switchTab('membership')" class="underline font-bold ml-1">Learn More</a>
+    </div>
+
+    <!-- Navigation Bar -->
+    <header class="bg-craft-card border-b border-craft-light sticky top-0 z-40 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('home')">
+                <div class="w-11 h-11 rounded-xl bg-craft-primary flex items-center justify-center text-white text-xl shadow-md">
+                    <i class="fa-solid fa-hands-holding-child"></i>
+                </div>
+                <div>
+                    <span class="text-2xl font-serif font-bold tracking-tight text-craft-text">CraftConnect<span class="text-craft-accent">.AI</span></span>
+                    <span class="block text-[10px] uppercase tracking-widest text-craft-muted font-semibold">Artisan & Maker Ecosystem</span>
+                </div>
+            </div>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center space-x-8 font-medium text-sm">
+                <button onclick="switchTab('home')" id="nav-home" class="text-craft-primary border-b-2 border-craft-primary pb-1 transition">Home</button>
+                <button onclick="switchTab('marketplace')" id="nav-marketplace" class="text-craft-muted hover:text-craft-primary transition">Marketplace</button>
+                <button onclick="switchTab('suppliers')" id="nav-suppliers" class="text-craft-muted hover:text-craft-primary transition">Suppliers</button>
+                <button onclick="switchTab('community')" id="nav-community" class="text-craft-muted hover:text-craft-primary transition">Community</button>
+                <button onclick="switchTab('membership')" id="nav-membership" class="text-craft-muted hover:text-craft-primary transition">Membership</button>
+                <button onclick="switchTab('dashboard')" id="nav-dashboard" class="text-craft-muted hover:text-craft-primary transition">My Dashboard</button>
+            </nav>
+
+            <!-- Action Buttons -->
+            <div class="flex items-center space-x-3">
+                <button onclick="openAuthModal('login')" class="hidden sm:inline-block px-4 py-2 text-sm font-semibold text-craft-text hover:text-craft-primary transition">Login</button>
+                <button onclick="openAuthModal('signup')" class="px-5 py-2.5 bg-craft-primary hover:bg-[#788874] text-white text-sm font-semibold rounded-xl shadow-md transition transform active:scale-95">Get Started</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow">
+
+        <!-- ================= HOME TAB ================= -->
+        <section id="tab-home" class="tab-content">
+            <!-- Hero Section -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-craft-light text-craft-primary mb-6">
+                        <i class="fa-solid fa-sparkles mr-2 text-craft-accent"></i> Powered by Artisan AI & Sustainable Tech
+                    </span>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold leading-tight text-craft-text mb-6">
+                        Where Heritage Craft Meets <span class="text-craft-accent italic">Modern AI</span>
+                    </h1>
+                    <p class="text-lg text-craft-muted mb-8 leading-relaxed">
+                        Empowering handmade creators, artisans, and small business owners with automated pricing assistants, direct sustainable raw-material sourcing, and a global marketplace.
+                    </p>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                        <button onclick="switchTab('marketplace')" class="px-8 py-4 bg-craft-accent hover:bg-[#C0725A] text-white font-semibold rounded-2xl shadow-lg transition text-center">
+                            Explore Marketplace
+                        </button>
+                        <button onclick="openUploadModal()" class="px-8 py-4 bg-white border-2 border-craft-primary text-craft-primary hover:bg-craft-light font-semibold rounded-2xl transition text-center">
+                            Upload a Craft Product
+                        </button>
+                    </div>
+
+                    <!-- Trust Stats -->
+                    <div class="grid grid-cols-3 gap-6 mt-12 pt-8 border-t border-craft-light">
+                        <div>
+                            <p class="text-2xl font-serif font-bold text-craft-text">4,500+</p>
+                            <p class="text-xs text-craft-muted uppercase tracking-wider">Active Artisans</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl font-serif font-bold text-craft-text">98%</p>
+                            <p class="text-xs text-craft-muted uppercase tracking-wider">Fair Wage Match</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl font-serif font-bold text-craft-text">120+</p>
+                            <p class="text-xs text-craft-muted uppercase tracking-wider">Verified Suppliers</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Graphic Card -->
+                <div class="relative">
+                    <div class="absolute -inset-1.5 bg-gradient-to-r from-craft-primary to-craft-accent rounded-3xl blur-lg opacity-30"></div>
+                    <div class="relative bg-craft-card p-6 sm:p-8 rounded-3xl shadow-xl border border-craft-light">
+                        <div class="flex items-center justify-between mb-6">
+                            <span class="text-xs font-bold uppercase tracking-wider bg-craft-light text-craft-primary px-3 py-1 rounded-full">AI Business Assistant Active</span>
+                            <div class="flex space-x-1.5">
+                                <div class="w-3 h-3 rounded-full bg-craft-accent"></div>
+                                <div class="w-3 h-3 rounded-full bg-craft-gold"></div>
+                                <div class="w-3 h-3 rounded-full bg-craft-primary"></div>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="bg-craft-light p-4 rounded-2xl">
+                                <p class="text-xs font-semibold text-craft-muted">CraftGPT Suggested Pricing:</p>
+                                <p class="text-lg font-serif font-bold text-craft-text mt-1">Handmade Ceramic Vase: <span class="text-craft-accent">$65.00</span></p>
+                                <p class="text-xs text-craft-primary mt-1"><i class="fa-solid fa-circle-check"></i> Based on material cost, time spent, and local artisan demand.</p>
+                            </div>
+                            <div class="bg-white border border-craft-light p-4 rounded-2xl flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-10 h-10 rounded-full bg-craft-light flex items-center justify-center text-craft-primary font-bold">🌿</div>
+                                    <div>
+                                        <p class="text-sm font-semibold">Organic Cotton Supplier</p>
+                                        <p class="text-xs text-craft-muted">Direct connection in Jaipur</p>
+                                    </div>
+                                </div>
+                                <span class="text-xs font-semibold bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-full">Verified</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Key Features Grid -->
+            <div class="bg-craft-card py-20 border-y border-craft-light">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center max-w-2xl mx-auto mb-16">
+                        <h2 class="text-3xl font-serif font-bold text-craft-text mb-4">Built Specifically for Independent Creators</h2>
+                        <p class="text-craft-muted">Everything you need to scale your handmade business without losing your artistic freedom.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="bg-craft-bg p-8 rounded-3xl border border-craft-light hover:shadow-lg transition">
+                            <div class="w-12 h-12 rounded-2xl bg-craft-primary text-white flex items-center justify-center text-xl mb-6 shadow-md">
+                                <i class="fa-solid fa-robot"></i>
+                            </div>
+                            <h3 class="text-xl font-serif font-bold mb-3">AI Business Assistant</h3>
+                            <p class="text-craft-muted text-sm leading-relaxed">Instantly calculate fair pricing, generate search-optimized product descriptions, and plan inventory effortlessly.</p>
+                        </div>
+                        <div class="bg-craft-bg p-8 rounded-3xl border border-craft-light hover:shadow-lg transition">
+                            <div class="w-12 h-12 rounded-2xl bg-craft-accent text-white flex items-center justify-center text-xl mb-6 shadow-md">
+                                <i class="fa-solid fa-truck-ramp-box"></i>
+                            </div>
+                            <h3 class="text-xl font-serif font-bold mb-3">Supplier Discovery</h3>
+                            <p class="text-craft-muted text-sm leading-relaxed">Source ethically harvested raw materials directly from verified regional suppliers at transparent wholesale prices.</p>
+                        </div>
+                        <div class="bg-craft-bg p-8 rounded-3xl border border-craft-light hover:shadow-lg transition">
+                            <div class="w-12 h-12 rounded-2xl bg-craft-gold text-white flex items-center justify-center text-xl mb-6 shadow-md">
+                                <i class="fa-solid fa-people-group"></i>
+                            </div>
+                            <h3 class="text-xl font-serif font-bold mb-3">Expression Community</h3>
+                            <p class="text-craft-muted text-sm leading-relaxed">Connect with mentor artisans, join live masterclasses, and earn prestigious Mentor Badges as you grow.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= MARKETPLACE TAB ================= -->
+        <section id="tab-marketplace" class="tab-content hidden py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+                    <div>
+                        <h2 class="text-3xl font-serif font-bold text-craft-text">Artisan Marketplace</h2>
+                        <p class="text-craft-muted text-sm">Discover unique, handmade pieces crafted with love and tradition.</p>
+                    </div>
+                    <div class="flex space-x-3">
+                        <input type="text" placeholder="Search crafts..." class="px-4 py-2 bg-craft-card border border-craft-light rounded-xl text-sm focus:outline-none focus:border-craft-primary">
+                        <button onclick="openUploadModal()" class="px-4 py-2 bg-craft-primary text-white text-sm font-semibold rounded-xl shadow-md hover:bg-[#788874]">
+                            <i class="fa-solid fa-plus mr-1"></i> Add Product
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Product 1 -->
+                    <div class="bg-craft-card rounded-3xl overflow-hidden border border-craft-light shadow-sm hover:shadow-md transition">
+                        <div class="h-64 bg-craft-light relative flex items-center justify-center text-craft-muted">
+                            <i class="fa-solid fa-image text-4xl"></i>
+                            <span class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-craft-text text-xs font-bold px-3 py-1 rounded-full">Pottery</span>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="font-serif font-bold text-lg text-craft-text">Hand-Thrown Ceramic Mug</h3>
+                                <span class="text-craft-accent font-bold">$38.00</span>
+                            </div>
+                            <p class="text-xs text-craft-muted mb-4">By Elena Vance • Portland, OR</p>
+                            <div class="bg-craft-light p-3 rounded-2xl mb-4 text-xs">
+                                <p class="font-semibold text-craft-primary">Behind the Craft:</p>
+                                <p class="text-craft-muted mt-0.5">Built with local stoneware clay, glazed with non-toxic amber finish over 3 firings.</p>
+                            </div>
+                            <button onclick="alert('Added to cart!')" class="w-full py-2.5 bg-craft-primary text-white text-sm font-semibold rounded-xl hover:bg-[#788874] transition">
+                                Purchase Artisan Piece
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Product 2 -->
+                    <div class="bg-craft-card rounded-3xl overflow-hidden border border-craft-light shadow-sm hover:shadow-md transition">
+                        <div class="h-64 bg-craft-light relative flex items-center justify-center text-craft-muted">
+                            <i class="fa-solid fa-image text-4xl"></i>
+                            <span class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-craft-text text-xs font-bold px-3 py-1 rounded-full">Textiles</span>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="font-serif font-bold text-lg text-craft-text">Woven Merino Wool Throw</h3>
+                                <span class="text-craft-accent font-bold">$145.00</span>
+                            </div>
+                            <p class="text-xs text-craft-muted mb-4">By Kaelen Weaver • Asheville, NC</p>
+                            <div class="bg-craft-light p-3 rounded-2xl mb-4 text-xs">
+                                <p class="font-semibold text-craft-primary">Behind the Craft:</p>
+                                <p class="text-craft-muted mt-0.5">Hand-loom woven using sustainably sheared organic wool from regional farms.</p>
+                            </div>
+                            <button onclick="alert('Added to cart!')" class="w-full py-2.5 bg-craft-primary text-white text-sm font-semibold rounded-xl hover:bg-[#788874] transition">
+                                Purchase Artisan Piece
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Product 3 -->
+                    <div class="bg-craft-card rounded-3xl overflow-hidden border border-craft-light shadow-sm hover:shadow-md transition">
+                        <div class="h-64 bg-craft-light relative flex items-center justify-center text-craft-muted">
+                            <i class="fa-solid fa-image text-4xl"></i>
+                            <span class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-craft-text text-xs font-bold px-3 py-1 rounded-full">Woodwork</span>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="font-serif font-bold text-lg text-craft-text">Walnut Cutting Board</h3>
+                                <span class="text-craft-accent font-bold">$85.00</span>
+                            </div>
+                            <p class="text-xs text-craft-muted mb-4">By Marcus Thorne • Burlington, VT</p>
+                            <div class="bg-craft-light p-3 rounded-2xl mb-4 text-xs">
+                                <p class="font-semibold text-craft-primary">Behind the Craft:</p>
+                                <p class="text-craft-muted mt-0.5">Crafted from reclaimed black walnut wood finished in food-grade organic beeswax.</p>
+                            </div>
+                            <button onclick="alert('Added to cart!')" class="w-full py-2.5 bg-craft-primary text-white text-sm font-semibold rounded-xl hover:bg-[#788874] transition">
+                                Purchase Artisan Piece
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SUPPLIERS TAB ================= -->
+        <section id="tab-suppliers" class="tab-content hidden py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <h2 class="text-3xl font-serif font-bold text-craft-text mb-3">Sustainable Raw Material Discovery</h2>
+                    <p class="text-craft-muted text-sm">Connect with ethical suppliers who support fair wages, organic cultivation, and eco-friendly harvesting.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-craft-card p-8 rounded-3xl border border-craft-light flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-xs font-bold uppercase tracking-wider bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full">Verified Eco-Supplier</span>
+                                <span class="text-sm font-bold text-craft-primary">Min Order: $50</span>
+                            </div>
+                            <h3 class="text-xl font-serif font-bold mb-2">Himalayan Organic Yarn Co.</h3>
+                            <p class="text-xs text-craft-muted mb-4"><i class="fa-solid fa-location-dot mr-1 text-craft-accent"></i> Himachal Pradesh, India</p>
+                            <p class="text-sm text-craft-muted mb-6">Specializing in hand-spun cashmere and organic sheep wool, naturally dyed using madder root and indigo leaves.</p>
+                        </div>
+                        <button onclick="alert('Request sent to supplier!')" class="w-full py-3 bg-craft-light text-craft-primary font-semibold rounded-xl hover:bg-craft-primary hover:text-white transition">
+                            Contact Supplier & Get Wholesale Catalog
+                        </button>
+                    </div>
+
+                    <div class="bg-craft-card p-8 rounded-3xl border border-craft-light flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-xs font-bold uppercase tracking-wider bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full">Fair Trade Certified</span>
+                                <span class="text-sm font-bold text-craft-primary">Min Order: $75</span>
+                            </div>
+                            <h3 class="text-xl font-serif font-bold mb-2">Verdant Clay & Minerals</h3>
+                            <p class="text-xs text-craft-muted mb-4"><i class="fa-solid fa-location-dot mr-1 text-craft-accent"></i> Santa Fe, New Mexico</p>
+                            <p class="text-sm text-craft-muted mb-6">Purveyors of non-toxic, locally mined stoneware clay bodies and lead-free mineral glaze powders.</p>
+                        </div>
+                        <button onclick="alert('Request sent to supplier!')" class="w-full py-3 bg-craft-light text-craft-primary font-semibold rounded-xl hover:bg-craft-primary hover:text-white transition">
+                            Contact Supplier & Get Wholesale Catalog
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= COMMUNITY TAB ================= -->
+        <section id="tab-community" class="tab-content hidden py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <h2 class="text-3xl font-serif font-bold text-craft-text mb-3">Expression Entrepreneur Community</h2>
+                    <p class="text-craft-muted text-sm">A collaborative space where seasoned master makers mentor emerging artisans.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Community Member 1 -->
+                    <div class="bg-craft-card p-6 rounded-3xl border border-craft-light text-center">
+                        <div class="w-20 h-20 bg-craft-light rounded-full mx-auto flex items-center justify-center text-craft-primary text-2xl font-bold mb-4 shadow-inner">
+                            EV
+                        </div>
+                        <h3 class="font-serif font-bold text-lg">Elena Vance</h3>
+                        <p class="text-xs text-craft-accent font-semibold mb-2"><i class="fa-solid fa-medal"></i> Master Mentor Badge</p>
+                        <p class="text-xs text-craft-muted mb-6">Specializes in ceramic studio scaling, pricing strategy, and export logistics.</p>
+                        <button onclick="alert('Connected with mentor!')" class="px-4 py-2 bg-craft-light text-craft-primary text-xs font-semibold rounded-xl hover:bg-craft-primary hover:text-white transition">
+                            Request Mentorship
+                        </button>
+                    </div>
+
+                    <!-- Community Member 2 -->
+                    <div class="bg-craft-card p-6 rounded-3xl border border-craft-light text-center">
+                        <div class="w-20 h-20 bg-craft-light rounded-full mx-auto flex items-center justify-center text-craft-primary text-2xl font-bold mb-4 shadow-inner">
+                            KW
+                        </div>
+                        <h3 class="font-serif font-bold text-lg">Kaelen Weaver</h3>
+                        <p class="text-xs text-craft-gold font-semibold mb-2"><i class="fa-solid fa-award"></i> Textile Leader</p>
+                        <p class="text-xs text-craft-muted mb-6">Expert in sustainable fiber sourcing, loom automation, and social media branding.</p>
+                        <button onclick="alert('Connected with mentor!')" class="px-4 py-2 bg-craft-light text-craft-primary text-xs font-semibold rounded-xl hover:bg-craft-primary hover:text-white transition">
+                            Request Mentorship
+                        </button>
+                    </div>
+
+                    <!-- Community Member 3 -->
+                    <div class="bg-craft-card p-6 rounded-3xl border border-craft-light text-center">
+                        <div class="w-20 h-20 bg-craft-light rounded-full mx-auto flex items-center justify-center text-craft-primary text-2xl font-bold mb-4 shadow-inner">
+                            MT
+                        </div>
+                        <h3 class="font-serif font-bold text-lg">Marcus Thorne</h3>
+                        <p class="text-xs text-craft-accent font-semibold mb-2"><i class="fa-solid fa-medal"></i> Master Mentor Badge</p>
+                        <p class="text-xs text-craft-muted mb-6">Focuses on woodworking workshop safety, inventory management, and B2B wholesale.</p>
+                        <button onclick="alert('Connected with mentor!')" class="px-4 py-2 bg-craft-light text-craft-primary text-xs font-semibold rounded-xl hover:bg-craft-primary hover:text-white transition">
+                            Request Mentorship
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= MEMBERSHIP TAB ================= -->
+        <section id="tab-membership" class="tab-content hidden py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <h2 class="text-3xl font-serif font-bold text-craft-text mb-3">Expression Entrepreneur Membership</h2>
+                    <p class="text-craft-muted text-sm">Choose the tier that fits your craft business stage and accelerate your growth.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                    <!-- Standard Tier -->
+                    <div class="bg-craft-card p-8 rounded-3xl border border-craft-light flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-serif font-bold mb-2">Artisan Free Tier</h3>
+                            <p class="text-3xl font-serif font-bold text-craft-text mb-4">$0 <span class="text-xs font-normal text-craft-muted">/ forever</span></p>
+                            <ul class="space-y-3 text-sm text-craft-muted mb-8">
+                                <li><i class="fa-solid fa-check text-craft-primary mr-2"></i> Standard Marketplace Listing</li>
+                                <li><i class="fa-solid fa-check text-craft-primary mr-2"></i> 5% Transaction Fee</li>
+                                <li><i class="fa-solid fa-check text-craft-primary mr-2"></i> Basic Community Forum Access</li>
+                            </ul>
+                        </div>
+                        <button onclick="openAuthModal('signup')" class="w-full py-3 bg-craft-light text-craft-primary font-semibold rounded-xl hover:bg-craft-primary hover:text-white transition">
+                            Get Started Free
+                        </button>
+                    </div>
+
+                    <!-- Pro Expression Tier -->
+                    <div class="bg-craft-card p-8 rounded-3xl border-2 border-craft-accent relative shadow-lg flex flex-col justify-between">
+                        <span class="absolute -top-3.5 right-8 bg-craft-accent text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Most Popular</span>
+                        <div>
+                            <h3 class="text-xl font-serif font-bold mb-2">Expression Entrepreneur Pro</h3>
+                            <p class="text-3xl font-serif font-bold text-craft-text mb-4">$19 <span class="text-xs font-normal text-craft-muted">/ month</span></p>
+                            <ul class="space-y-3 text-sm text-craft-muted mb-8">
+                                <li><i class="fa-solid fa-check text-craft-accent mr-2"></i> 0% Commission on First 10 Sales</li>
+                                <li><i class="fa-solid fa-check text-craft-accent mr-2"></i> Unlimited AI Business Assistant access</li>
+                                <li><i class="fa-solid fa-check text-craft-accent mr-2"></i> Direct Supplier Wholesale Directory</li>
+                                <li><i class="fa-solid fa-check text-craft-accent mr-2"></i> Eligible for Mentor Badge Status</li>
+                            </ul>
+                        </div>
+                        <button onclick="openAuthModal('signup')" class="w-full py-3 bg-craft-accent text-white font-semibold rounded-xl hover:bg-[#C0725A] transition shadow-md">
+                            Join Expression Pro
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= DASHBOARD TAB ================= -->
+        <section id="tab-dashboard" class="tab-content hidden py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center mb-8">
+                    <div>
+                        <h2 class="text-3xl font-serif font-bold text-craft-text">Artisan Dashboard</h2>
+                        <p class="text-craft-muted text-sm">Welcome back! Here is an overview of your store performance.</p>
+                    </div>
+                    <button onclick="openUploadModal()" class="px-4 py-2 bg-craft-primary text-white text-sm font-semibold rounded-xl shadow-md hover:bg-[#788874]">
+                        <i class="fa-solid fa-plus mr-1"></i> Upload New Product
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-craft-card p-6 rounded-2xl border border-craft-light">
+                        <p class="text-xs text-craft-muted uppercase font-semibold">Total Revenue</p>
+                        <p class="text-2xl font-serif font-bold text-craft-text mt-1">$1,240.00</p>
+                        <span class="text-xs text-emerald-600 font-medium"><i class="fa-solid fa-arrow-up"></i> +12% this month</span>
+                    </div>
+                    <div class="bg-craft-card p-6 rounded-2xl border border-craft-light">
+                        <p class="text-xs text-craft-muted uppercase font-semibold">Active Listings</p>
+                        <p class="text-2xl font-serif font-bold text-craft-text mt-1">6 Pieces</p>
+                        <span class="text-xs text-craft-primary font-medium">All items optimized by AI</span>
+                    </div>
+                    <div class="bg-craft-card p-6 rounded-2xl border border-craft-light">
+                        <p class="text-xs text-craft-muted uppercase font-semibold">AI Assistant Queries</p>
+                        <p class="text-2xl font-serif font-bold text-craft-text mt-1">24 Used</p>
+                        <span class="text-xs text-craft-accent font-medium">Pricing & descriptions</span>
+                    </div>
+                    <div class="bg-craft-card p-6 rounded-2xl border border-craft-light">
+                        <p class="text-xs text-craft-muted uppercase font-semibold">Community Status</p>
+                        <p class="text-xl font-serif font-bold text-craft-text mt-1">Mentor Candidate</p>
+                        <span class="text-xs text-craft-gold font-medium">Active contributor</span>
+                    </div>
+                </div>
+
+                <div class="bg-craft-card p-8 rounded-3xl border border-craft-light">
+                    <h3 class="font-serif font-bold text-xl mb-4">Recent Sales & Orders</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center p-4 bg-craft-light rounded-2xl text-sm">
+                            <div>
+                                <p class="font-semibold text-craft-text">Hand-Thrown Ceramic Mug</p>
+                                <p class="text-xs text-craft-muted">Ordered by Sarah Jenkins • Oct 1, 2026</p>
+                            </div>
+                            <span class="px-3 py-1 bg-emerald-100 text-emerald-800 text-xs font-bold rounded-full">Fulfilled</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Floating AI Assistant Widget -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <div id="ai-chat-box" class="hidden w-80 bg-craft-card border border-craft-light rounded-3xl shadow-2xl mb-4 overflow-hidden flex flex-col">
+            <div class="bg-craft-primary p-4 text-white flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fa-solid fa-robot"></i>
+                    <span class="font-serif font-bold text-sm">CraftGPT Assistant</span>
+                </div>
+                <button onclick="toggleAIChat()" class="text-white hover:text-craft-light"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="p-4 h-64 overflow-y-auto space-y-3 text-xs bg-craft-bg">
+                <div class="bg-craft-card p-3 rounded-2xl border border-craft-light">
+                    <p class="font-semibold text-craft-primary">CraftGPT:</p>
+                    <p class="text-craft-muted mt-1">Hello! I'm your AI business assistant. Need help pricing your handmade item or writing an Instagram caption?</p>
+                </div>
+            </div>
+            <div class="p-3 bg-craft-card border-t border-craft-light flex space-x-2">
+                <input type="text" placeholder="Ask AI anything..." class="flex-grow px-3 py-2 bg-craft-light text-xs rounded-xl focus:outline-none">
+                <button onclick="alert('AI processed request!')" class="px-3 py-2 bg-craft-primary text-white text-xs rounded-xl"><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+        </div>
+        <button onclick="toggleAIChat()" class="w-14 h-14 bg-craft-primary hover:bg-[#788874] text-white rounded-full shadow-lg flex items-center justify-center text-xl transition transform hover:scale-105">
+            <i class="fa-solid fa-sparkles"></i>
+        </button>
+    </div>
+
+    <!-- Auth Modal (Login / Signup) -->
+    <div id="auth-modal" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-craft-card w-full max-w-md p-8 rounded-3xl shadow-2xl border border-craft-light relative">
+            <button onclick="closeAuthModal()" class="absolute top-6 right-6 text-craft-muted hover:text-craft-text"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <h2 id="auth-title" class="text-2xl font-serif font-bold mb-6 text-craft-text">Join CraftConnect AI</h2>
+            
+            <form onsubmit="handleAuth(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-craft-muted uppercase mb-1">Account Role</label>
+                    <select class="w-full px-4 py-3 bg-craft-light text-sm rounded-xl border border-craft-light focus:outline-none focus:border-craft-primary">
+                        <option>Artisan / Maker / Seller</option>
+                        <option>Buyer / Art Collector</option>
+                        <option>Community Mentor</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-craft-muted uppercase mb-1">Email Address</label>
+                    <input type="email" required placeholder="artisan@handcraft.com" class="w-full px-4 py-3 bg-craft-light text-sm rounded-xl border border-craft-light focus:outline-none focus:border-craft-primary">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-craft-muted uppercase mb-1">Password</label>
+                    <input type="password" required placeholder="••••••••" class="w-full px-4 py-3 bg-craft-light text-sm rounded-xl border border-craft-light focus:outline-none focus:border-craft-primary">
+                </div>
+                <button type="submit" class="w-full py-3.5 bg-craft-primary hover:bg-[#788874] text-white font-semibold rounded-xl shadow-md transition">
+                    Continue to Dashboard
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Product Upload Modal -->
+    <div id="upload-modal" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-craft-card w-full max-w-lg p-8 rounded-3xl shadow-2xl border border-craft-light relative max-h-[90vh] overflow-y-auto">
+            <button onclick="closeUploadModal()" class="absolute top-6 right-6 text-craft-muted hover:text-craft-text"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <h2 class="text-2xl font-serif font-bold mb-2 text-craft-text">Upload Craft Product</h2>
+            <p class="text-xs text-craft-muted mb-6">Add your handmade piece and share its unique story with the world.</p>
+            
+            <form onsubmit="handleUpload(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-craft-muted uppercase mb-1">Product Title</label>
+                    <input type="text" required placeholder="e.g. Handmade Ceramic Tea Set" class="w-full px-4 py-3 bg-craft-light text-sm rounded-xl border border-craft-light focus:outline-none focus:border-craft-primary">
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-craft-muted uppercase mb-1">Category</label>
+                        <select class="w-full px-4 py-3 bg-craft-light text-sm rounded-xl border border-craft-light focus:outline-none focus:border-craft-primary">
+                            <option>Pottery & Ceramics</option>
+                            <option>Textiles & Weaving</option>
+                            <option>Woodwork</option>
+                            <option>Jewelry</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-craft-muted uppercase mb-1">Price ($ USD)</label>
+                        <input type="number" required placeholder="45.00" class="w-full px-4 py-3 bg-craft-light text-sm rounded-xl border border-craft-light focus:outline-none focus:border-craft-primary">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-craft-muted uppercase mb-1">Behind the Craft (Story & Materials)</label>
+                    <textarea rows="3" required placeholder="Share the inspiration, materials used, and hours spent crafting..." class="w-full px-4 py-3 bg-craft-light text-sm rounded-xl border border-craft-light focus:outline-none focus:border-craft-primary"></textarea>
+                </div>
+                <button type="submit" class="w-full py-3.5 bg-craft-accent hover:bg-[#C0725A] text-white font-semibold rounded-xl shadow-md transition">
+                    Publish to Marketplace
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-craft-card border-t border-craft-light py-12 text-center text-xs text-craft-muted">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p>&copy; 2026 CraftConnect AI. Empowering independent artisans worldwide with sustainable technology.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Controllers -->
+    <script>
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById('tab-' + tabId).classList.remove('hidden');
+
+            document.querySelectorAll('nav button').forEach(btn => {
+                btn.classList.remove('text-craft-primary', 'border-b-2', 'border-craft-primary', 'pb-1');
+                btn.classList.add('text-craft-muted');
+            });
+            const activeBtn = document.getElementById('nav-' + tabId);
+            if(activeBtn) {
+                activeBtn.classList.add('text-craft-primary', 'border-b-2', 'border-craft-primary', 'pb-1');
+                activeBtn.classList.remove('text-craft-muted');
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleAIChat() {
+            const chat = document.getElementById('ai-chat-box');
+            chat.classList.toggle('hidden');
+        }
+
+        function openAuthModal(mode) {
+            document.getElementById('auth-modal').classList.remove('hidden');
+        }
+
+        function closeAuthModal() {
+            document.getElementById('auth-modal').classList.add('hidden');
+        }
+
+        function openUploadModal() {
+            document.getElementById('upload-modal').classList.remove('hidden');
+        }
+
+        function closeUploadModal() {
+            document.getElementById('upload-modal').classList.remove('hidden').add?.('hidden');
+            document.getElementById('upload-modal').classList.add('hidden');
+        }
+
+        function handleAuth(e) {
+            e.preventDefault();
+            alert('Successfully authenticated! Redirecting to Dashboard.');
+            closeAuthModal();
+            switchTab('dashboard');
+        }
+
+        function handleUpload(e) {
+            e.preventDefault();
+            alert('Product successfully uploaded with AI Story & Pricing assistance!');
+            closeUploadModal();
+            switchTab('marketplace');
+        }
+    </script>
+</body>
+</html>
